@@ -6,6 +6,9 @@ from bson.objectid import ObjectId
 def post_account(account: dict):
     return accounts_collection.insert_one(account)
 
+def get_existing_accounts(user_id: str):
+    return accounts_collection.find({"user_id": user_id})
+
 # Function to get an account from the database
 def get_account(account_id: str):
     return accounts_collection.find_one({"_id": ObjectId(account_id)}, {"_id": 0})

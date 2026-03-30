@@ -30,6 +30,14 @@ def test_create_account(client, auth_headers, sample_account_payload):
     response = client.post(f"{BASE_URL}/", json=sample_account_payload, headers=auth_headers)
     assert response.status_code == 200
 
+def test_get_existing_accounts(client, auth_headers):
+    response = client.get(f"{BASE_URL}/", headers=auth_headers)
+    assert response.status_code == 200
+
+def test_get_existing_accounts_requires_auth(client):
+    response = client.get(f"{BASE_URL}/")
+    assert response.status_code == 401
+
 def test_get_account_details(client, auth_headers, account_id):
     response = client.get(f"{BASE_URL}/{account_id}", headers=auth_headers)
     assert response.status_code == 200

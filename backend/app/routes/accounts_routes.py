@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.schemas.accounts_schema import Account, Amount
-from app.controllers.accounts_controller import create_account, deposit_into_account, fetch_account, withdraw_from_account, fetch_transactions
+from app.controllers.accounts_controller import create_account, deposit_into_account, fetch_account, withdraw_from_account, fetch_transactions, fetch_existing_accounts
 from app.utils.util import get_current_user, verify_account_ownership
 
 
@@ -12,6 +12,16 @@ def post_account(account: Account, current_user: dict = Depends(get_current_user
     try:
         result = create_account(account, current_user["user_id"])
         return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# get accounts
+@router.get("/", dependencies=[Depends(get_current_user)])
+def get_existing_accounts(current_user: dict = Depends(get_current_user)):
+    try:
+        return fetch_existing_accounts(current_user["user_id"])
     except HTTPException:
         raise
     except Exception as e:

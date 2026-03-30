@@ -1,0 +1,313 @@
+.home-page {
+  text-align: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.logout-btn {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.logout-btn:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+  opacity: 1;
+}
+
+.home-error {
+  margin: 16px 24px 0;
+}
+
+.home-content {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 300px;
+  min-width: 300px;
+  border-right: 1px solid var(--border);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.main-panel {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Account list */
+.account-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.account-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.account-item:hover {
+  border-color: var(--accent);
+}
+
+.account-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.account-type {
+  text-transform: capitalize;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.account-balance {
+  font-family: var(--mono);
+  color: var(--text-h);
+}
+
+/* Account details */
+.account-details {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 12px;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 16px;
+  color: var(--text-h);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.detail-value.balance {
+  font-family: var(--mono);
+  font-size: 24px;
+  color: var(--accent);
+}
+
+/* Deposit / Withdraw forms */
+.forms-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.deposit-form,
+.withdraw-form {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.deposit-form form,
+.withdraw-form form {
+  display: flex;
+  gap: 8px;
+}
+
+.deposit-form input,
+.withdraw-form input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 16px;
+  background: var(--bg);
+  color: var(--text-h);
+  font-family: var(--sans);
+}
+
+.deposit-form input:focus,
+.withdraw-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-bg);
+}
+
+/* Transaction list */
+.transaction-list {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.transaction-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transaction-list th {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 2px solid var(--border);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+
+.transaction-list td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-h);
+}
+
+.transaction-list td:first-child {
+  text-transform: capitalize;
+}
+
+.positive {
+  color: #22c55e;
+}
+
+.negative {
+  color: #ef4444;
+}
+
+/* Create account button */
+.create-account-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: transparent;
+  color: var(--accent);
+  border: 1px dashed var(--accent-border);
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.create-account-btn:hover:not(:disabled) {
+  background: var(--accent-bg);
+  opacity: 1;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: var(--shadow);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  color: var(--text);
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: var(--text-h);
+  opacity: 1;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal button[type="submit"] {
+  margin-top: 4px;
+}
+
+/* Empty / no-selection state */
+.no-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .home-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: unset;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .forms-row {
+    grid-template-columns: 1fr;
+  }
+}

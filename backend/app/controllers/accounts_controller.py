@@ -1,6 +1,6 @@
 from datetime import datetime, UTC
 from app.schemas.accounts_schema import Account, Amount
-from app.models.accounts_models import post_account, get_account, put_deposit, put_withdraw, post_transaction, get_transactions
+from app.models.accounts_models import post_account, get_account, put_deposit, put_withdraw, post_transaction, get_transactions, get_existing_accounts
 from bson.objectid import ObjectId
 from fastapi import HTTPException
 
@@ -12,6 +12,14 @@ def create_account(account: Account, user_id: str):
     try:
         result = post_account(account_data)
         return {"message": "Account created successfully", "account_id": str(result.inserted_id)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Fetch existing accounts
+def fetch_existing_accounts(user_id: str):
+    try:
+        accounts = get_existing_accounts(user_id)
+        return [{"account_id": str(account["_id"])} for account in accounts]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
