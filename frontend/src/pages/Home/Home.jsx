@@ -20,24 +20,31 @@ export default function Home() {
   const [error, setError] = useState('')
   const [showCreateModal, setShowCreateModal] = useState(false)
 
-  const loadAccounts = useCallback(async () => {
+  const loadAccounts = useCallback(async () => { // useCallback is used to memoize the loadAccounts function so that it is not recreated on every render
     setLoading(true)
     try {
+      // API: get the list of accounts
       const listRes = await API.get('/api/accounts/')
       const ids = listRes.data.map(a => a.account_id)
       if (ids.length === 0) {
         setAccounts([])
         return
       }
+
+      // API: get the details of each account
       const results = await Promise.allSettled(
         ids.map(id => API.get(`/api/accounts/${id}`))
       )
+
+      // for each account, add the details to the accounts list
       const loaded = []
       results.forEach((result, idx) => {
         if (result.status === 'fulfilled') {
-          loaded.push({ ...result.value.data, id: ids[idx] })
+          loaded.push({ ...result.value.data, id: ids[idx] }) 
         }
       })
+
+      // set the accounts list when all the accounts are loaded
       setAccounts(loaded)
     } catch {
       setError('Failed to load accounts')
@@ -46,15 +53,18 @@ export default function Home() {
     }
   }, [])
 
+  // load the accounts when the component is mounted
   useEffect(() => {
     loadAccounts()
   }, [loadAccounts])
 
+  // API: create a new account
   const handleCreateAccount = async (accountData) => {
     await API.post('/api/accounts/', accountData)
     await loadAccounts()
   }
 
+  // select an account and load the transactions for that account
   const handleSelectAccount = async (account) => {
     setSelectedAccount(account)
     setTransactions([])
@@ -67,14 +77,18 @@ export default function Home() {
     }
   }
 
+  // refresh the Ui after a deposit or a withdrawal
   const refreshSelectedAccount = useCallback(async (accountId) => {
     try {
+      // API: get the details of the account and the transactions for the updated account
       const [accountRes, txnRes] = await Promise.all([
         API.get(`/api/accounts/${accountId}`),
         API.get(`/api/accounts/${accountId}/transactions`),
       ])
+      // set the selected account and the transactions for the updated account
       setSelectedAccount({ ...accountRes.data, id: accountId })
       setTransactions(txnRes.data)
+      // reload the accounts list
       await loadAccounts()
     } catch {
       setError('Failed to refresh account')

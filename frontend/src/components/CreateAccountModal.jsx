@@ -41,6 +41,14 @@ export default function CreateAccountModal({ onClose, onCreate }) {
             >
               <option value="checking">Checking</option>
               <option value="savings">Savings</option>
+              <option value="retirement">Retirement</option>
+              <option value="emergency">Emergency</option>
+              <option value="education">Education</option>
+              <option value="vacation">Vacation</option>
+              <option value="other">Other</option>
+              <option value="business">Business</option>
+              <option value="investment">Investment</option>
+              <option value="other">Other</option>
             </select>
           </div>
           <div className="form-group">

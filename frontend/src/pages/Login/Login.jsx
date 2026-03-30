@@ -12,8 +12,8 @@ export default function Login() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault() // prevent the default form submission, reloading the page
+    setError('') // clear the error message from the previous failed submission
     setLoading(true)
     try {
       await login(email, password)
@@ -58,7 +58,7 @@ export default function Login() {
           </button>
         </form>
         <p className="auth-link">
-          Don&apos;t have an account? <Link to="/register">Register</Link>
+          Don&apos;t have an account? <Link to="/register">Register</Link> 
         </p>
       </div>
     </div>

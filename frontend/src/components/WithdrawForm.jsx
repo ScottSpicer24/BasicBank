@@ -6,7 +6,7 @@ export default function WithdrawForm({ onWithdraw }) {
   const [error, setError] = useState('')
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault() // prevent the default form submission, reloading the page
     const value = parseFloat(amount)
     if (!value || value <= 0) {
       setError('Enter a valid amount')

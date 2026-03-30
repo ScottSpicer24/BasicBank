@@ -13,7 +13,8 @@ export default function Register() {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault() // prevent the default form submission, reloading the page
+    setError('') // clear the error message from the previous failed submission
     setError('')
     setLoading(true)
     try {
